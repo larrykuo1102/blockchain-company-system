@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
    res.send('Hello World');
 })
 
-app.get('/test', function(req, res) {
+app.get('/api/abi', function(req, res) {
         // set the provider you want from Web3.providers
     web3 = new Web3(new Web3.providers.HttpProvider("127.0.0.1:7545"));
     // web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/v3/b15f2435af904c2282c62839cd18144e"));
