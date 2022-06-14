@@ -7,7 +7,7 @@
 </template>
 
 <script>
-
+// import Web3 from 'web3'
 export default {
   name: 'App',
   components: {
@@ -36,22 +36,16 @@ export default {
             return response.json() ;
         }
       })
-      .then((data) => { 
-          
-        if ( data['data']['error'] == '無此帳號或密碼' ) {
-          console.log( '登入失敗') ;
-          this.isUser = 'False'
-        }
-        else {
-          console.log( '登入成功')
-          this.checkuser = data['data']['name']
-          this.role = data['data']['role']
-          this.userid = data['data']['id']
 
-          this.loginstatus() ;
-        }  
-      })
+    },
+    web_test() {
+      // var web3 = new Web3(new Web3.providers.HttpProvider("127.0.0.1:8545"));
+      // web3.eth.getBalance("0xf7a6900c7957e372F9c4aBF599c4031c3DdBcCC7")
+      // .then(console.log);
     }
+  },
+  crated() {
+    this.web_test() ;
   }
 }
 </script>

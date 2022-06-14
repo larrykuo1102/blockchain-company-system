@@ -18,9 +18,6 @@ contract Company {
         return personal[own][index] ;
     }
 
-    function getNumber( uint a, uint b ) pure public  returns ( uint  ) {
-        return a + b  ;
-    }
 
     function getNotesLen(address own) public view returns (uint) {
         return personal[own].length;

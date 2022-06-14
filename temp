@@ -1,0 +1,7 @@
+
+
+
+geth --datadir data init genesis.json
+geth --datadir  --networkid 42 console
+
+geth --datadir data --networkid 42  --dev --dev.period 1 console
