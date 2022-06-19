@@ -1,13 +1,20 @@
 <template>
       <div id="app">
+        <div>
+          <a>請輸入要放入文件的內容</a>
+          <input type="textarea" v-model="content" >
+        </div>
+        <div>
+          <button @click="add_Note">送出</button>
+        </div>
         
         
-    </div>
+      </div>
   
 </template>
 
 <script>
-
+// import Web3 from 'web3'
 export default {
   name: 'App',
   components: {
@@ -15,7 +22,8 @@ export default {
   },
   data() {
     return {
-      abi : ''
+      abi : '',
+      content : ''
     }
   },
   methods : {
@@ -36,22 +44,57 @@ export default {
             return response.json() ;
         }
       })
-      .then((data) => { 
-          
-        if ( data['data']['error'] == '無此帳號或密碼' ) {
-          console.log( '登入失敗') ;
-          this.isUser = 'False'
-        }
-        else {
-          console.log( '登入成功')
-          this.checkuser = data['data']['name']
-          this.role = data['data']['role']
-          this.userid = data['data']['id']
+      .then((data) => {
+        console.log( data )
+      })
 
-          this.loginstatus() ;
-        }  
+    },
+    async add_Note() {
+      let url = '/api/addNote'
+      // alert( this.content)
+      await fetch( url, {
+        method : 'POST',
+          headers : {
+                // 'Content-Type': 'application/json'
+          },
+          body :  JSON.stringify({
+              'content' : this.content,
+              
+          })
+      } ) 
+      .then( (response) => {
+        if ( response.ok ) {
+            return response.json() ;
+        }
+      })
+      .then((data) => {
+        console.log( 'result', data )
+      })
+    },
+    async get_Note() {
+      let url = '/api/getNote'
+      // alert( this.content)
+      await fetch( url, {
+        method : 'GET',
+          headers : {
+                // 'Content-Type': 'application/json'
+          },
+          body :  JSON.stringify({
+              'content' : this.content,
+              
+          })
+      } ) 
+      .then( (response) => {
+        if ( response.ok ) {
+            return response.json() ;
+        }
+      })
+      .then((data) => {
+        console.log( 'result', data )
       })
     }
+  },
+  crated() {
   }
 }
 </script>
