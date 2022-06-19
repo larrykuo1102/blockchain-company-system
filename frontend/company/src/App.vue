@@ -1,8 +1,15 @@
 <template>
       <div id="app">
+        <div>
+          <a>請輸入要放入文件的內容</a>
+          <input type="textarea" v-model="content" >
+        </div>
+        <div>
+          <button @click="add_Note">送出</button>
+        </div>
         
         
-    </div>
+      </div>
   
 </template>
 
@@ -15,7 +22,8 @@ export default {
   },
   data() {
     return {
-      abi : ''
+      abi : '',
+      content : ''
     }
   },
   methods : {
@@ -36,16 +44,57 @@ export default {
             return response.json() ;
         }
       })
+      .then((data) => {
+        console.log( data )
+      })
 
     },
-    web_test() {
-      // var web3 = new Web3(new Web3.providers.HttpProvider("127.0.0.1:8545"));
-      // web3.eth.getBalance("0xf7a6900c7957e372F9c4aBF599c4031c3DdBcCC7")
-      // .then(console.log);
+    async add_Note() {
+      let url = '/api/addNote'
+      // alert( this.content)
+      await fetch( url, {
+        method : 'POST',
+          headers : {
+                // 'Content-Type': 'application/json'
+          },
+          body :  JSON.stringify({
+              'content' : this.content,
+              
+          })
+      } ) 
+      .then( (response) => {
+        if ( response.ok ) {
+            return response.json() ;
+        }
+      })
+      .then((data) => {
+        console.log( 'result', data )
+      })
+    },
+    async get_Note() {
+      let url = '/api/getNote'
+      // alert( this.content)
+      await fetch( url, {
+        method : 'GET',
+          headers : {
+                // 'Content-Type': 'application/json'
+          },
+          body :  JSON.stringify({
+              'content' : this.content,
+              
+          })
+      } ) 
+      .then( (response) => {
+        if ( response.ok ) {
+            return response.json() ;
+        }
+      })
+      .then((data) => {
+        console.log( 'result', data )
+      })
     }
   },
   crated() {
-    this.web_test() ;
   }
 }
 </script>
